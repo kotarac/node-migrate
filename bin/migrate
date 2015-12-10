@@ -36,9 +36,10 @@ var usage = [
   , ''
   , '  Options:'
   , ''
-  , '     -c, --chdir <path>      change the working directory'
-  , '     --state-file <path>     set path to state file (migrations/.migrate)'
-  , '     --template-file <path>  set path to template file to use for new migrations'
+  , '     -c, --chdir <path>         change the working directory'
+  , '     --state-file <path>        set path to state file (migrations/.migrate)'
+  , '     --template-file <path>     set path to template file to use for new migrations'
+  , '     --compiler <ext>:<module>  extension and module for creating / compiling files'
   , '  Commands:'
   , ''
   , '     down   [name]    migrate down till given migration'
@@ -78,6 +79,15 @@ function abort(msg) {
   process.exit(1);
 }
 
+// handle ext:mod
+
+function compiler(c) {
+  var compiler = c.split(':');
+
+  options.extension = compiler[0];
+  require(compiler[1]);
+}
+
 // parse arguments
 
 var arg;
@@ -98,7 +108,11 @@ while (args.length) {
       options.stateFile = required();
       break;
     case '--template-file':
-      template = fs.readFileSync(required());
+      options.templateFile = required();
+      template = fs.readFileSync(options.templateFile);
+      break;
+    case '--compiler':
+      compiler(required());
       break;
     default:
       if (options.command) {
@@ -172,9 +186,9 @@ var commands = {
  */
 
 function create(name) {
-  var path = join('migrations', name + '.js');
+  var path = join('migrations', name + '.' + (options.extension || 'js'));
   log('create', join(process.cwd(), path));
-  fs.writeFileSync(path, template);
+  fs.writeFileSync(path, options.extension && !options.templateFile ? '' : template);
 }
 
 /**
@@ -185,7 +199,7 @@ function create(name) {
 
 function performMigration(direction, migrationName) {
   var state = options.stateFile || join('migrations', '.migrate');
-  var set = migrate.load(state, 'migrations');
+  var set = migrate.load(state, 'migrations', options.extension || 'js');
 
   set.on('migration', function(migration, direction){
     log(direction, migration.title);

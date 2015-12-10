@@ -1,22 +1,33 @@
 {
-  "name": "migrate",
+  "name": "migrate2",
   "version": "0.2.2",
-  "description": "Abstract migration framework for node",
+  "description": "Abstract migration framework for node with mocha-style compiler support.",
+  "homepage": "https://github.com/kotarac/node-migrate",
+  "bugs": "https://github.com/kotarac/node-migrate/issues",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kotarac/node-migrate.git"
+  },
   "keywords": [
     "migrate",
     "migrations"
   ],
-  "author": "TJ Holowaychuk <tj@vision-media.ca>",
-  "repository": "git://github.com/visionmedia/node-migrate",
+  "author": {
+    "name": "Stipe Kotarac",
+    "email": "stipe@kotarac.net",
+    "url": "https://github.com/kotarac"
+  },
+  "license": "MIT",
+  "main": "index.js",
   "bin": {
     "migrate": "./bin/migrate"
   },
   "devDependencies": {
     "mocha": "^2.2.1"
   },
-  "main": "index",
   "engines": {
-    "node": ">= 0.4.x"
+    "node": ">=0.10.0",
+    "npm": ">=1.2.10"
   },
   "scripts": {
     "test": "mocha"
