@@ -1,6 +1,6 @@
 {
   "name": "migrate2",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Abstract migration framework for node with mocha-style compiler support.",
   "homepage": "https://github.com/kotarac/node-migrate",
   "bugs": "https://github.com/kotarac/node-migrate/issues",
@@ -32,7 +32,6 @@
   "scripts": {
     "test": "mocha"
   },
-  "license": "MIT",
   "dependencies": {
     "dateformat": "^1.0.12"
   }
