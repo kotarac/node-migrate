@@ -16,12 +16,13 @@ Options:
    -c, --chdir <path>         change the working directory
    --state-file <path>        set path to state file (migrations/.migrate)
    --template-file <path>     set path to template file to use for new migrations
+   --date-format <format>  set a date format to use for new migration filenames
    --compiler <ext>:<module>  extension and module for creating / compiling files'
 
 Commands:
 
-   down             migrate down
-   up               migrate up (the default command)
+   down   [name]    migrate down till given migration
+   up     [name]    migrate up till given migration (the default command)
    create [title]   create a new migration file with optional [title]
 
 ```

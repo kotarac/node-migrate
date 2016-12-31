@@ -31,5 +31,9 @@
   },
   "scripts": {
     "test": "mocha"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "dateformat": "^1.0.12"
   }
 }
